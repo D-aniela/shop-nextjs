@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import { FC } from 'react'
+import { Navbar } from '../ui'
 
 interface Props {
   children: any
@@ -19,13 +20,15 @@ export const ShopLayout: FC<Props> = ({
       <Head>
         <title>{title}</title>
         <meta name='description' content={pageDescription} />
-				{/* Sirve para redes sociales cuando compartes un link */}
+        {/* Sirve para redes sociales cuando compartes un link */}
         <meta name='og:title' content={title} />
         <meta name='og:description' content={pageDescription} />
         {imageFullUrl && <meta name='og:image' content={imageFullUrl} />}
       </Head>
 
-      <nav>{/* TODO: NAVBAR */}</nav>
+      <nav>
+        <Navbar />
+      </nav>
 
       {/* TODO: SIDEBAR */}
 
