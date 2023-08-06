@@ -1,5 +1,6 @@
 import { ShopLayout } from '@/components/layout'
 import { ProductSlideShow } from '@/components/products'
+import { ItemCounter } from '@/components/ui'
 import { initialData } from '@/database/products'
 import { Box, Button, Chip, Grid, Typography } from '@mui/material'
 
@@ -26,7 +27,7 @@ const ProductPage = () => {
             {/* Cantidad */}
             <Box sx={{ my: 2 }}>
               <Typography variant='subtitle2'>Cantidad</Typography>
-              {/* ItemCounter */}
+              <ItemCounter />
             </Box>
 
             {/* Agregar al carrito */}
