@@ -1,5 +1,5 @@
 import { IProduct } from '@/interfaces'
-import { Card, CardActionArea, CardMedia, Grid } from '@mui/material'
+import { Grid } from '@mui/material'
 import { FC } from 'react'
 import ProductCard from './ProductCard'
 
