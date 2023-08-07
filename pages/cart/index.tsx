@@ -1,5 +1,6 @@
 import { CarList } from '@/components/cart'
 import { ShopLayout } from '@/components/layout'
+import { OrderSummary } from '../../components/cart/OrderSummary'
 import {
   Box,
   Button,
@@ -29,7 +30,7 @@ const CartPage = () => {
             <CardContent>
               <Typography variant='h1'>Orden</Typography>
               <Divider sx={{ my: 1 }} />
-              {/* Order Summary */}
+              <OrderSummary />
               <Box sx={{ mt: 3 }}>
                 <Button color='secondary' className='circular-btn' fullWidth>
                   Checkout
