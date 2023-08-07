@@ -1,5 +1,5 @@
 import { ShopLayout } from '@/components/layout'
-import { ProductSlideShow } from '@/components/products'
+import { ProductSlideShow, SizeSelector } from '@/components/products'
 import { ItemCounter } from '@/components/ui'
 import { initialData } from '@/database/products'
 import { Box, Button, Chip, Grid, Typography } from '@mui/material'
@@ -10,9 +10,8 @@ const ProductPage = () => {
   return (
     <ShopLayout title={product.title} pageDescription={product.description}>
       <Grid container spacing={3}>
-
         <Grid item xs={12} sm={7}>
-          <ProductSlideShow images={product.images}/>
+          <ProductSlideShow images={product.images} />
         </Grid>
 
         <Grid item xs={12} sm={5}>
@@ -28,6 +27,10 @@ const ProductPage = () => {
             <Box sx={{ my: 2 }}>
               <Typography variant='subtitle2'>Cantidad</Typography>
               <ItemCounter />
+              <SizeSelector
+                selectedSize={product.sizes[0]}
+                sizes={product.sizes}
+              />
             </Box>
 
             {/* Agregar al carrito */}
