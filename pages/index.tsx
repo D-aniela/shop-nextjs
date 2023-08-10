@@ -1,16 +1,13 @@
-import {
-  Card,
-  CardActionArea,
-  CardMedia,
-  Grid,
-  Typography,
-} from '@mui/material'
+import { NextPage } from 'next'
+import { Typography } from '@mui/material'
 
 import { ShopLayout } from '@/components/layout'
-import { initialData } from '@/database/products'
 import ProductList from '@/components/products/ProductList'
+import { useProducts } from '@/hooks'
 
-export default function Home() {
+const HomePage: NextPage = () => {
+  const { products, isLoading } = useProducts('/products')
+
   return (
     <ShopLayout
       title={'Teslo-Shop - Home'}
@@ -23,7 +20,9 @@ export default function Home() {
         Todos los productos
       </Typography>
 
-      <ProductList products={initialData.products as any} />
+      {isLoading ? <h1>Cargando</h1> : <ProductList products={products} />}
     </ShopLayout>
   )
 }
+
+export default HomePage
