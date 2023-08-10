@@ -1,4 +1,5 @@
 import NextLink from 'next/link'
+import { useRouter } from 'next/router'
 import {
   AppBar,
   Link,
@@ -12,6 +13,9 @@ import {
 import { SearchOutlined, ShoppingCartOutlined } from '@mui/icons-material'
 
 export const Navbar = () => {
+  const { asPath } = useRouter()
+  console.log(asPath)
+
   return (
     <AppBar>
       <Toolbar>
@@ -27,17 +31,23 @@ export const Navbar = () => {
         <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
           <NextLink href='/category/men' passHref>
             <Link component={'span'}>
-              <Button>Hombres</Button>
+              <Button color={asPath === '/category/men' ? 'secondary' : 'info'}>
+                Hombres
+              </Button>
             </Link>
           </NextLink>
           <NextLink href='/category/women' passHref>
             <Link component={'span'}>
-              <Button>Mujeres</Button>
+              <Button color={asPath === '/category/women' ? 'secondary' : 'info'}>
+                Mujeres
+              </Button>
             </Link>
           </NextLink>
           <NextLink href='/category/kid' passHref>
             <Link component={'span'}>
-              <Button>Niños</Button>
+              <Button color={asPath === '/category/kid' ? 'secondary' : 'info'}>
+                Niños
+              </Button>
             </Link>
           </NextLink>
         </Box>
