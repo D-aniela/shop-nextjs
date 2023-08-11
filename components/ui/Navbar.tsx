@@ -11,10 +11,12 @@ import {
   Badge,
 } from '@mui/material'
 import { SearchOutlined, ShoppingCartOutlined } from '@mui/icons-material'
+import { useContext } from 'react'
+import { UiContext } from '@/context'
 
 export const Navbar = () => {
   const { asPath } = useRouter()
-  console.log(asPath)
+  const { toggleSideMenu } = useContext(UiContext)
 
   return (
     <AppBar>
@@ -38,7 +40,9 @@ export const Navbar = () => {
           </NextLink>
           <NextLink href='/category/women' passHref>
             <Link component={'span'}>
-              <Button color={asPath === '/category/women' ? 'secondary' : 'info'}>
+              <Button
+                color={asPath === '/category/women' ? 'secondary' : 'info'}
+              >
                 Mujeres
               </Button>
             </Link>
@@ -68,7 +72,7 @@ export const Navbar = () => {
           </Link>
         </NextLink>
 
-        <Button>Menú</Button>
+        <Button onClick={toggleSideMenu}>Menú</Button>
       </Toolbar>
     </AppBar>
   )
