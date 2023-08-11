@@ -1,4 +1,4 @@
-import { GetServerSideProps } from 'next'
+import { GetStaticPaths, GetStaticProps, GetServerSideProps } from 'next'
 import { Box, Button, Chip, Grid, Typography } from '@mui/material'
 
 import { ShopLayout } from '@/components/layout'
@@ -65,8 +65,45 @@ const ProductPage: NextPage<Props> = ({ product }) => {
 
 // You should use getServerSideProps when:
 // - Only if you need to pre-render a page whose data must be fetched at request time
-export const getServerSideProps: GetServerSideProps = async ({ params }) => {
-  const { slug } = params as { slug: string }
+// export const getServerSideProps: GetServerSideProps = async ({ params }) => {
+//   const { slug = '' } = params as { slug: string }
+//   const product = await dbProducts.getProductsBySlug(slug)
+
+//   if (!product) {
+//     return {
+//       redirect: {
+//         destination: '/',
+//         permanent: false,
+//       },
+//     }
+//   }
+
+//   return {
+//     props: { product },
+//   }
+// }
+
+export const getStaticPaths: GetStaticPaths = async (ctx) => {
+  const productsSlugs = await dbProducts.getAllProductSlugs()
+
+  return {
+    paths: productsSlugs.map(({ slug }) => ({
+      params: {
+        slug,
+      },
+    })),
+    fallback: 'blocking',
+  }
+}
+
+// You should use getStaticProps when:
+//- The data required to render the page is available at build time ahead of a user’s request.
+//- The data comes from a headless CMS.
+//- The data can be publicly cached (not user-specific).
+//- The page must be pre-rendered (for SEO) and be very fast — getStaticProps generates HTML and JSON files, both of which can be cached by a CDN for performance.
+
+export const getStaticProps: GetStaticProps = async ({ params }) => {
+  const { slug = '' } = params as { slug: string }
   const product = await dbProducts.getProductsBySlug(slug)
 
   if (!product) {
