@@ -28,3 +28,14 @@ export const getAllProductSlugs = async (): Promise<ProductSlug[]> => {
   return slugs
   // return JSON.parse(JSON.stringify(slugs))
 }
+
+export const getProductsByTerm = async (term: string): Promise<IProduct[]> => {
+  term = term.toString().toLowerCase()
+
+  await db.connect()
+  const products = await Product.find({
+    $text: { $search: term },
+  }).lean()
+  await db.disconnect()
+  return products
+}
