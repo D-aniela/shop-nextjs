@@ -3,6 +3,10 @@ import { createContext } from 'react'
 
 interface ContextProps {
   cart: ICartProduct[]
+  numberOfItems: number
+  subtotal: number
+  tax: number
+  total: number
 
   // Methods
   addProductToCart: (product: ICartProduct) => void
