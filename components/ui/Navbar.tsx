@@ -99,6 +99,7 @@ export const Navbar = () => {
           <IconButton
             className='fadeIn'
             onClick={() => setIsSearchVisible(true)}
+            sx={{ display: { xs: 'none', sm: 'flex' } }}
           >
             <SearchOutlined />
           </IconButton>
