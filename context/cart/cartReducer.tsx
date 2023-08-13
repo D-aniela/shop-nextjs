@@ -6,10 +6,8 @@ type CartActionType =
       type: '[Cart] - LoadCart from cookies | storage'
       payload: ICartProduct[]
     }
-  | {
-      type: '[Cart] - Update products in cart'
-      payload: ICartProduct[]
-    }
+  | { type: '[Cart] - Update products in cart'; payload: ICartProduct[] }
+  | { type: '[Cart] - Change cart quantity'; payload: ICartProduct }
 
 export const cartReducer = (
   state: CartState,
@@ -26,6 +24,16 @@ export const cartReducer = (
       return {
         ...state,
         cart: [...action.payload],
+      }
+
+    case '[Cart] - Change cart quantity':
+      return {
+        ...state,
+        cart: state.cart.map((p) => {
+          if (p._id !== action.payload._id) return p
+          if (p.size !== action.payload.size) return p
+          return action.payload
+        }),
       }
 
     default:
