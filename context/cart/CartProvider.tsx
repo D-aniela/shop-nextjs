@@ -73,6 +73,10 @@ export const CartProvider: FC = ({ children }) => {
     dispatch({ type: '[Cart] - Change cart quantity', payload: product })
   }
 
+  const removeCartProduct = (product: ICartProduct) => {
+    dispatch({ type: '[Cart] - Remove product in cart', payload: product })
+  }
+
   return (
     <CartContext.Provider
       value={{
@@ -80,6 +84,7 @@ export const CartProvider: FC = ({ children }) => {
         // Methods
         addProductToCart,
         updateCartQuantity,
+        removeCartProduct,
       }}
     >
       {children}
