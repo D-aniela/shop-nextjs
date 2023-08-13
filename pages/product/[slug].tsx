@@ -1,5 +1,6 @@
-import { useState } from 'react'
+import { useState, useContext } from 'react'
 import { GetStaticPaths, GetStaticProps } from 'next'
+import { useRouter } from 'next/router'
 import { Box, Button, Chip, Grid, Typography } from '@mui/material'
 
 import { ShopLayout } from '@/components/layout'
@@ -8,12 +9,16 @@ import { ItemCounter } from '@/components/ui'
 import { ICartProduct, IProduct, ISize } from '@/interfaces'
 import { NextPage } from 'next'
 import { dbProducts } from '@/database'
+import { CartContext } from '@/context/cart'
 
 interface Props {
   product: IProduct
 }
 
 const ProductPage: NextPage<Props> = ({ product }) => {
+  const router = useRouter()
+  const { addProductToCart } = useContext(CartContext)
+
   const [tempCartProduct, setTempCartProduct] = useState<ICartProduct>({
     _id: product._id,
     images: product.images[0],
@@ -37,7 +42,9 @@ const ProductPage: NextPage<Props> = ({ product }) => {
   }
 
   const onAddProduct = () => {
-    console.log('Agregando producto al carrito')
+    if (!tempCartProduct.size) return
+    addProductToCart(tempCartProduct)
+    // router.push('/cart')
   }
 
   return (
@@ -72,7 +79,11 @@ const ProductPage: NextPage<Props> = ({ product }) => {
             </Box>
 
             {product.inStock > 0 ? (
-              <Button color='secondary' className='circular-btn'>
+              <Button
+                color='secondary'
+                className='circular-btn'
+                onClick={onAddProduct}
+              >
                 {tempCartProduct.size
                   ? 'Agregar al carrito'
                   : 'Seleccione una talla'}
