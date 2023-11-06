@@ -1,4 +1,4 @@
-import { FC, useReducer, ReactNode, useEffect } from 'react'
+import { FC, useReducer, ReactNode, useEffect, PropsWithChildren } from 'react'
 import Cookie from 'js-cookie'
 
 import { cartReducer, CartContext } from './'
@@ -20,7 +20,7 @@ const CART_INITIAL_STATE: CartState = {
   total: 0,
 }
 
-export const CartProvider: FC = ({ children }) => {
+export const CartProvider: FC<PropsWithChildren> = ({ children }) => {
   const [state, dispatch] = useReducer(cartReducer, CART_INITIAL_STATE)
 
   useEffect(() => {
@@ -40,11 +40,11 @@ export const CartProvider: FC = ({ children }) => {
   useEffect(() => {
     const numberOfItems = state.cart.reduce(
       (prev, current) => current.quantity + prev,
-      0,
+      0
     )
     const subtotal = state.cart.reduce(
       (prev, current) => current.price * current.quantity + prev,
-      0,
+      0
     )
     const taxRate = Number(process.env.NEXT_PUBLIC_TAX_RATE || 1)
 
@@ -79,7 +79,7 @@ export const CartProvider: FC = ({ children }) => {
         payload: [...state.cart, product],
       })
     const productInCartButDifferentSize = state.cart.some(
-      (p) => p._id === product._id && p.size === product.size,
+      (p) => p._id === product._id && p.size === product.size
     )
     if (!productInCartButDifferentSize)
       return dispatch({
