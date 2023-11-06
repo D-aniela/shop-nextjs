@@ -13,10 +13,9 @@ import {
 import { ErrorOutline } from '@mui/icons-material'
 import { useForm } from 'react-hook-form'
 
-import { AuthContext } from '../../context'
-import { tesloApi } from '../../api'
-import { AuthLayout } from '../../components/layouts'
-import { validations } from '../../utils'
+import { AuthLayout } from '@/components/layout'
+import { AuthContext } from '@/context/auth'
+import { validations } from '@/utils'
 
 type FormData = {
   name: string
