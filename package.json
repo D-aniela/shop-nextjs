@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "migrate-dev": "npx prisma migrate dev",
+    "seed": "ts-node database/seed-sql.ts"
   },
   "dependencies": {
     "@emotion/react": "^11.11.1",
@@ -14,6 +16,7 @@
     "@mui/icons-material": "^5.14.3",
     "@mui/material": "^5.14.3",
     "@mui/x-data-grid": "^6.11.0",
+    "@prisma/client": "^5.9.1",
     "@types/bcryptjs": "^2.4.2",
     "@types/node": "20.4.7",
     "@types/react": "18.2.18",
@@ -35,6 +38,8 @@
   },
   "devDependencies": {
     "@types/js-cookie": "^3.0.3",
-    "@types/jsonwebtoken": "^9.0.2"
+    "@types/jsonwebtoken": "^9.0.2",
+    "prisma": "^5.9.1",
+    "ts-node": "^10.9.2"
   }
 }
